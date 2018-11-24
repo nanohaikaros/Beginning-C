@@ -15,8 +15,11 @@ int main(void)
     time_t seed = 0;                // Seed value for random number sequence
     unsigned int number = 0;        // Stores an input digit
     time_t wait_start = 0;          // Stores current time
+    clock_t start_time = 0;         // Game start time in clock ticks
+    unsigned int score = 0;         // Game score
+    unsigned int total_digits = 0;  // Total of digits entered in a game
+    unsigned int game_time = 0;     // Game time in seconds
 
-    /* More variable declarations for the program */
 
     // Describe how the game is played
     printf("\nTo play Simple Simon, ");
@@ -35,7 +38,8 @@ int main(void)
         correct = true;         // Indicates correct sequence entered
         tries = 0;              // Initialize count of successful tries
         digits = 2;             // Initial length of digit sequence
-        // Other code to initialize the game
+        start_time = clock();   // Recond time at start of game
+
         // Inner loop continues as long as sequences are entered correctly
         while(correct)
         {
@@ -47,12 +51,12 @@ int main(void)
             for(unsigned int i = 1; i<=digits; ++i)
                 printf("%d ", rand()%10);   // Output a random digit
 
-            for( ; clock()-wait_start<DELAY*CLOCKS_PER_SEC ; ); // Wait DEALY seconds
+            for( ; clock()-wait_start<DELAY*CLOCKS_PER_SEC; ); // Wait DEALY seconds
 
             // Now overwrite the digit sequence
             printf("\r");           // Go to beginning of the line
             for (unsigned int i = 1; i <= digits; i++)
-                printf(" ");        // Output two spaces
+                printf("  ");        // Output two spaces
 
             if(tries == 1)          // Only output message for 1st try
                 printf("\nNow you enter the sequence - don't forget the spaces\n");
@@ -76,7 +80,19 @@ int main(void)
             printf("%s\n", correct ? "Correct!" : "Wrong!");
         }
 
-        // Output the score when a game is finished
+        // Calculate and output the game score
+        score = 10*(digits - ((tries % 3) == 1));   // Points for sequence length
+        total_digits = digits*(((tries % 3) == 0) ? 3 : tries % 3);
+        if(digits > 2)
+            total_digits += 3*((digits - 1)*(digits - 2)/2 - 1);
+
+        game_time = (clock() - start_time)/CLOCKS_PER_SEC - tries*DELAY;
+
+        if(total_digits > game_time)
+            score += 10*(game_time - total_digits); // Add points for speed
+        printf("\nGame time was %u seconds. Your score is %u", game_time, score);
+
+        fflush(stdin);      // Clear the input buffer
 
         // Check if a new game is required
         printf("\nDo you want to play again (y/n)? ");
