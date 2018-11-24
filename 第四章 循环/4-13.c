@@ -47,13 +47,19 @@ int main(void)
             for(unsigned int i = 1; i<=digits; ++i)
                 printf("%d ", rand()%10);   // Output a random digit
 
-                // Code to wait one second
+            for( ; clock()-wait_start<DELAY*CLOCKS_PER_SEC ; ); // Wait DEALY seconds
 
-                // Code to overwrite the digit sequence
+            // Now overwrite the digit sequence
+            printf("\r");           // Go to beginning of the line
+            for (unsigned int i = 1; i <= digits; i++)
+                printf(" ");        // Output two spaces
 
-                // Code to prompt for the input sequence
+            if(tries == 1)          // Only output message for 1st try
+                printf("\nNow you enter the sequence - don't forget the spaces\n");
+            else
+                printf("\r");       // Back to the beginning of the line
 
-                srand(seed);        // Reinitialize the random sequence
+            srand(seed);        // Reinitialize the random sequence
             for(unsigned int i = 1; i<=digits; ++i)     
             // Read the input sequance & check against the original
             {
