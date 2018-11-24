@@ -1,11 +1,13 @@
 // Program 4.13 Simple Simon
 #include <stdio.h>              // For input and output
 #include <ctype.h>              // For toupper() function
+#include <stdbool.h>            // For bool, true, false
 
 int main(void)
 {
     char another_game = 'Y';    // Records if another game is to be played
     const unsigned int DELAY = 1;   // Display period in seconds
+    bool correct = true;            //  true for correct sequence, false otherwise
 
     /* More variable declarations for the program */
 
@@ -22,9 +24,13 @@ int main(void)
     // Game loop - one outer loop iteration is a complets game
     do 
     {
-        // Initialize a game
-
-        // Inner loop to play the game
+        correct = true;         // Indicates correct sequence entered
+        // Other code to initialize the game
+        // Inner loop continues as long as sequences are entered correctly
+        while(correct)
+        {
+            // Statements to play the game
+        }
 
         // Output the score when a game is finished
 
