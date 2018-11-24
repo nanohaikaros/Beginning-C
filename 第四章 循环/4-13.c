@@ -14,6 +14,7 @@ int main(void)
     unsigned int digits = 0;        // Number of digits in a sequence
     time_t seed = 0;                // Seed value for random number sequence
     unsigned int number = 0;        // Stores an input digit
+    time_t wait_start = 0;          // Stores current time
 
     /* More variable declarations for the program */
 
@@ -39,6 +40,7 @@ int main(void)
         while(correct)
         {
             ++tries;        //  A new attempt
+            wait_start = clock();   // record start time for sequence
 
             // Generate a sequence of digits and display them
             srand(time(&seed)); // Initialize the random sequence
@@ -52,19 +54,19 @@ int main(void)
                 // Code to prompt for the input sequence
 
                 srand(seed);        // Reinitialize the random sequence
-                for(unsigned int i = 1; i<=digits; ++i)     
-                // Read the input sequance & check against the original
+            for(unsigned int i = 1; i<=digits; ++i)     
+            // Read the input sequance & check against the original
+            {
+                scanf("%u", &number);       // Read a digit
+                if(number != rand()%10)     // Compare with generated digit
                 {
-                    scanf("%u", &number);       // Read a digit
-                    if(number != rand()%10)     // Compare with generated digit
-                    {
-                        correct = false;        // incorrect entry
-                        break;                  // No need to check fureher...
-                    }
+                    correct = false;        // incorrect entry
+                    break;                  // No need to check fureher...
                 }
-                // On every thied successful try, increase the sequence length
-                if(correct && ((tries % 3) == 0))
-                    ++digits;
+            }
+            // On every thied successful try, increase the sequence length
+            if(correct && ((tries % 3) == 0))
+                ++digits;
             printf("%s\n", correct ? "Correct!" : "Wrong!");
         }
 
