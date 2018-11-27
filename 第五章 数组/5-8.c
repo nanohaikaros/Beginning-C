@@ -44,7 +44,20 @@ int main(void)
         // Insert player symbol
         board[row][column] = (player == 1) ? 'X' : 'O';
 
-        /* code to check for a winner */
+        // Check for a winning line - diagonals first
+        if((board[0][0]==board[1][1] && board[0][0]==board[2][2]) ||
+            (board[0][2]==board[1][1] && board[0][2]==board[2][0]))
+            winner = player;
+        else
+        {
+            // Check rows and columns for a winning line
+            for(unsigned int line = 0; line <= 2; ++line)
+            {
+                if((board[line][0]==board[line][1]&&board[line][0]==board[line][2]) ||
+                    (board[0][line]==board[1][line]&&board[0][line]==board[2][line]))
+                    winner = player;
+            }
+        }
     }
     /* code to output the result */
 
