@@ -15,7 +15,7 @@ int main(void)
 
     printf("A variable of type long occupies %u bytes.", sizeof(long));
     printf("\nHere are the addresses of some variables of type long:");
-    printf("\nThe  address of a is: %p The address if b is: %p", &a, &b);
+    printf("\nThe address of a is: %p The address if b is: %p", &a, &b);
     printf("\nThe address of c is: %p", &c);
     printf("\n\nA variable of type double occupies %u bytes.", sizeof(double));
     printf("\nHere are the addresses of some variables of type double:");
