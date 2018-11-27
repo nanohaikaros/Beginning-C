@@ -59,7 +59,19 @@ int main(void)
             }
         }
     }
-    /* code to output the result */
+    // Game is over so display the final board
+    printf("\n");
+    printf(" %c | %c | %c\n", board[0][0], board[0][1], board[0][2]);
+    printf("---+---+---\n");
+    printf(" %c | %c | %c\n", board[1][0], board[1][1], board[1][2]);
+    printf("---+---+---\n");
+    printf(" %c | %c | %c\n", board[2][0], board[2][1], board[2][2]);
+
+    // Display result message
+    if(winner)
+        printf("\nCongratulations, player %d, YOU ARE THE WINNER!\n", winner);
+    else
+        printf("\nHow boring, it is a draw\n");
 
     return 0;
 }
