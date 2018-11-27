@@ -5,6 +5,9 @@ int main(void)
 {
     int player = 0;         // Current player number -1 or 2
     int winner = 0;         // The winning player number
+    int choice = 0;         // Chosen square
+    unsigned int row = 0;   // Row index for a square
+    unsigned int column = 0;// Column index for a square
 
     char board[3][3] = {    // The board
         {'1', '2', '3'},    // Initial values are characters '1' to '9'
@@ -26,7 +29,22 @@ int main(void)
         
         player = i%2 + 1;       // Select player
 
-        /* Code to play the game */
+        // Get valid player square swlwction
+        do 
+        {
+            printf("Player %d, please enter a valid square number "
+                    "for where you want to place your %c: ",
+                    player, (player == 1) ? 'X' : 'O');
+            scanf("%d", &choice);
+
+            row = --choice/3;           // Get row index of square
+            column = choice % 3;        // Get column index of square
+        } while(choice < 0 || choice > 8 || board[row][column] > '9');
+
+        // Insert player symbol
+        board[row][column] = (player == 1) ? 'X' : 'O';
+
+        /* code to check for a winner */
     }
     /* code to output the result */
 
