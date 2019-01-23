@@ -40,7 +40,7 @@ struct Date
 int main(void)
 {
     NumericDate yesterday = {11, 11, 2012};
-    MixedDate today = {"Monday", "12th Novemver", "2012"};
+    MixedDate today = {"Monday", "12th Novemver", 2012};
     char tomorrow[] = "Tues 13th nov 2012";
 
     UDate udate = {tomorrow};
