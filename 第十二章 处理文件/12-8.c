@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         printf_s("Please enter a filename: ");
         fgets(filename, FILENAME_MAX, stdin);
 
-        int len = strnlen_s(filename, sizeof(filename));
+        int len = strnlen(filename, sizeof(filename));
         if(filename[len - 1] == '\n')
             filename[len - 1] = '\0';
     }
